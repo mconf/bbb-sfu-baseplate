@@ -1,0 +1,28 @@
+{
+  "name": "bbb-sfu-baseplate",
+  "version": "1.0.0-alpha.1",
+  "description": "Baseplate classes and utilities for bbb-webrtc-sfu & associate services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prlanzarin/bbb-sfu-baseplate.git"
+  },
+  "keywords": [
+    "BigBlueButton",
+    "bbb-webrtc-sfu",
+    "BBB"
+  ],
+  "author": "Paulo Lanzarin",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/prlanzarin/bbb-sfu-baseplate/issues"
+  },
+  "homepage": "https://github.com/prlanzarin/bbb-sfu-baseplate#readme",
+  "devDependencies": {
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}
