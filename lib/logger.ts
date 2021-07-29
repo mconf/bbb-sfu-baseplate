@@ -1,17 +1,16 @@
 'use strict';
+import Winston from 'winston';
 
-const Winston = require('winston');
-
-type LoggerConfig = {
-  level: string;
-  filename: string;
+export type LoggerOptions = {
+  maxLevel: string;
+  file: string | false;
   stdout: boolean;
+  colorize: boolean;
 }
 
-const LoggerBuilder = (LOG_CONFIG: LoggerConfig) => {
-  const WLogger = new Winston.Logger();
-  const { level, filename, stdout = true } = LOG_CONFIG;
-  const COLORIZE = process.env.NODE_ENV !== 'production';
+export const LoggerBuilder = (loggerOptions: LoggerOptions) : Winston.LoggerInstance => {
+  const WLogger: Winston.LoggerInstance = new Winston.Logger();
+  const { maxLevel, file, stdout, colorize } = loggerOptions;
 
   WLogger.configure({
     levels: { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, trace: 5 },
@@ -30,24 +29,22 @@ const LoggerBuilder = (LOG_CONFIG: LoggerConfig) => {
       timestamp: true,
       prettyPrint: false,
       humanReadableUnhandledException: true,
-      colorize: COLORIZE,
+      colorize,
       handleExceptions: false,
       silent: false,
-      level,
+      maxLevel,
     });
   }
 
 
-  if (filename) {
+  if (file) {
     WLogger.add(Winston.transports.File, {
       timestamp: true,
-      filename,
+      file,
       prettyPrint: false,
-      level,
+      maxLevel,
     });
   }
 
   return WLogger;
 }
-
-export default LoggerBuilder;

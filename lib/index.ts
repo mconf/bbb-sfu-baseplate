@@ -1,5 +1,1 @@
-import LoggerBuilder from './logger';
-
-module.exports = {
-  LoggerBuilder,
-};
+export * from './logger';

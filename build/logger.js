@@ -1,10 +1,13 @@
 'use strict';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Winston = require('winston');
-const LoggerBuilder = (LOG_CONFIG) => {
-    const WLogger = new Winston.Logger();
-    const { level, filename, stdout = true } = LOG_CONFIG;
-    const COLORIZE = process.env.NODE_ENV !== 'production';
+exports.LoggerBuilder = void 0;
+const winston_1 = __importDefault(require("winston"));
+const LoggerBuilder = (loggerOptions) => {
+    const WLogger = new winston_1.default.Logger();
+    const { maxLevel, file, stdout, colorize } = loggerOptions;
     WLogger.configure({
         levels: { error: 0, warn: 1, info: 2, verbose: 3, debug: 4, trace: 5 },
         colors: {
@@ -17,24 +20,24 @@ const LoggerBuilder = (LOG_CONFIG) => {
         },
     });
     if (stdout) {
-        WLogger.add(Winston.transports.Console, {
+        WLogger.add(winston_1.default.transports.Console, {
             timestamp: true,
             prettyPrint: false,
             humanReadableUnhandledException: true,
-            colorize: COLORIZE,
+            colorize,
             handleExceptions: false,
             silent: false,
-            level,
+            maxLevel,
         });
     }
-    if (filename) {
-        WLogger.add(Winston.transports.File, {
+    if (file) {
+        WLogger.add(winston_1.default.transports.File, {
             timestamp: true,
-            filename,
+            file,
             prettyPrint: false,
-            level,
+            maxLevel,
         });
     }
     return WLogger;
 };
-exports.default = LoggerBuilder;
+exports.LoggerBuilder = LoggerBuilder;
