@@ -20,7 +20,7 @@
     "BBB"
   ],
   "author": "Paulo Lanzarin",
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/prlanzarin/bbb-sfu-baseplate/issues"
   },
